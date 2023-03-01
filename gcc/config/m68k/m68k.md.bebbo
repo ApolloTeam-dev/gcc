@@ -558,8 +558,8 @@
       && INTVAL (operands[1]) < 0x8000
       && INTVAL (operands[1]) >= -0x8000)
     {
-        if (ADDRESS_REG_P (operands[0])) return "cmp%.w %1,%0";
-        return "cmpiw%.l %1,%0";  // APOLLO 68080
+	  if (ADDRESS_REG_P (operands[0]))
+        return "cmp%.w %1,%0";
     }
   return "cmp%.l %d1,%d0";
 })
@@ -7133,7 +7133,7 @@
 	{
 	  if (TUNE_68060 || TUNE_68080)
 		  return "subq%.l #1,%0\;jcc %l1";
-      return "dbra%.l %0,%l1";  // APOLLO 68080
+      return "dbra %0,%l1\;clr%.w %0\;subq%.l #1,%0\;jcc %l1";
 	}
   if (GET_CODE (operands[0]) == MEM)
     return "subq%.l #1,%0\;jcc %l1";

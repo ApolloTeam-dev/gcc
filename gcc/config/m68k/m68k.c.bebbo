@@ -754,8 +754,6 @@ m68k_option_override (void)
       align_loops = 0;
     }
 #endif
-   align_labels = 0;
-   align_loops = 0;
 
   if (stack_limit_rtx != NULL_RTX && !TARGET_68020)
     {
@@ -4645,7 +4643,7 @@ output_addsi3 (rtx *operands)
 	}
       if (INTVAL (operands[2]) >= -0x8000
 	  && INTVAL (operands[2]) < 0x8000)
-	  {
+	{
 	  if (ADDRESS_REG_P (operands[0]))
 	    {
 	      if (TUNE_68040)
@@ -4654,7 +4652,7 @@ output_addsi3 (rtx *operands)
 		return MOTOROLA ? "lea (%c2,%0),%0" : "lea %0@(%c2),%0";
 	    }
 	  if (TUNE_68080)
-      return "addiw%.l %2,%0";  // APOLLO 68080
+	    return "addiw%.l %2,%0";
 	}
     }
   return "add%.l %2,%0";
